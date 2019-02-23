@@ -14,4 +14,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flame: ^0.10.2
+
 flutter:
+  assets:
+   - assets/images/
+   - assets/audio/
