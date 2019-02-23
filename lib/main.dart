@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' show runApp, MaterialApp;
 import 'package:flutter/services.dart';
 import 'package:flame/flame.dart';
@@ -5,8 +6,13 @@ import './root.dart' show FlutteryDashGame;
 
 void main() async {
   SystemChrome.setEnabledSystemUIOverlays([]);
-  var screenSize = await Flame.util.initialDimensions();
+  final screenSize = await Flame.util.initialDimensions();
+  final flutterDashGame = FlutteryDashGame(screenSize);
   runApp(MaterialApp(
-    home: FlutteryDashGame(screenSize).widget,
+    showPerformanceOverlay: true,
+    home: flutterDashGame.widget,
   ));
+  Flame.util.addGestureRecognizer(
+    TapGestureRecognizer()..onTapDown = flutterDashGame.onTapDown,
+  );
 }

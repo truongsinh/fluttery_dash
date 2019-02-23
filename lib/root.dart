@@ -25,7 +25,7 @@ class FlutteryDashGame extends BaseGame {
     bird.update(t * GameSpeed);
   }
 
-  void onTap(TapDownDetails ev) {
+  void onTapDown(TapDownDetails ev) {
     bird.flap();
   }
 }
