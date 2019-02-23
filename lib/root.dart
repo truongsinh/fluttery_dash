@@ -1,25 +1,31 @@
-import 'package:flutter/material.dart' show Canvas, Colors;
+import 'dart:ui';
+import 'package:flutter/gestures.dart';
 import 'package:flame/game.dart' show BaseGame;
-import 'package:flame/text_config.dart' show TextConfig;
-import 'package:flame/position.dart' show Position;
-import 'package:flame/anchor.dart' show Anchor;
+
+import 'bird.dart';
 
 class FlutteryDashGame extends BaseGame {
-  @override
-  void render(Canvas canvas) {
-    String text = "Score: 0";
-    TextConfig(
-      fontSize: 48.0,
-      fontFamily: 'Awesome Font',
-      color: Colors.blue,
-    ).render(
-      canvas,
-      text,
-      Position(size.width / 2, size.height / 2),
-      anchor: Anchor.center,
-    );
+  static const double GameSpeed = 1.0;
+
+  final Size screenSize;
+  final Bird bird;
+
+  FlutteryDashGame(this.screenSize) : bird = Bird(screenSize) {
+    initPositions();
+
+    this.add(bird);
+  }
+
+  void initPositions() {
+    bird.initPosition();
   }
 
   @override
-  void update(double t) {}
+  void update(double t) {
+    bird.update(t * GameSpeed);
+  }
+
+  void onTap(TapDownDetails ev) {
+    bird.flap();
+  }
 }
