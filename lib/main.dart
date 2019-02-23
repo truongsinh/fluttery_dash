@@ -1,5 +1,5 @@
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart' show runApp, MaterialApp;
+import 'package:flutter/material.dart' show MaterialApp, Scaffold, runApp;
 import 'package:flutter/services.dart';
 import 'package:flame/flame.dart';
 import './root.dart' show FlutteryDashGame;
@@ -10,9 +10,13 @@ void main() async {
   final flutterDashGame = FlutteryDashGame(screenSize);
   runApp(MaterialApp(
     showPerformanceOverlay: true,
-    home: flutterDashGame.widget,
+    home: Scaffold(body: flutterDashGame.widget),
   ));
   Flame.util.addGestureRecognizer(
-    TapGestureRecognizer()..onTapDown = flutterDashGame.onTapDown,
+    TapGestureRecognizer()
+      ..onTapDown = (TapDownDetails e) {
+        print('tap gester');
+        flutterDashGame.onTapDown(e);
+      },
   );
 }
