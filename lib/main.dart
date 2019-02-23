@@ -13,10 +13,6 @@ void main() async {
     home: Scaffold(body: flutterDashGame.widget),
   ));
   Flame.util.addGestureRecognizer(
-    TapGestureRecognizer()
-      ..onTapDown = (TapDownDetails e) {
-        print('tap gester');
-        flutterDashGame.onTapDown(e);
-      },
+    TapGestureRecognizer()..onTapDown = flutterDashGame.onTapDown,
   );
 }

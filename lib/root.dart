@@ -26,7 +26,6 @@ class FlutteryDashGame extends BaseGame {
   }
 
   void onTapDown(TapDownDetails ev) {
-    print('onTapDown ${DateTime.now()}');
     bird.flap();
   }
 }
