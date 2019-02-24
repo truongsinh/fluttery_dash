@@ -28,15 +28,9 @@ class Bird extends SpriteComponent {
           birdWidth,
           birdHeight,
           Sprite('bluebird-midflap.png'),
-        );
-
-  void setPosition(double x, double y) {
+        ) {
     this.x = x;
     this.y = y;
-  }
-
-  void initPosition() {
-    setPosition(initX, initY);
   }
 
   @override

@@ -3,21 +3,24 @@ import 'package:flutter/gestures.dart';
 import 'package:flame/game.dart' show BaseGame;
 
 import 'bird.dart';
+import 'ground.dart';
 
 class FlutteryDashGame extends BaseGame {
   static const double GameSpeed = 1.0;
 
   final Size screenSize;
   final Bird bird;
+  final Ground ground;
 
-  FlutteryDashGame(this.screenSize) : bird = Bird(screenSize) {
-    initPositions();
-
-    this.add(bird);
-  }
-
-  void initPositions() {
-    bird.initPosition();
+  FlutteryDashGame(this.screenSize)
+      : bird = Bird(screenSize),
+        ground = Ground(screenSize) {
+    this
+          //
+          ..add(bird)
+          ..add(ground)
+        //
+        ;
   }
 
   @override
