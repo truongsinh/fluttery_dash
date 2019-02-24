@@ -29,8 +29,8 @@ class Bird extends SpriteComponent {
           birdHeight,
           Sprite('bluebird-midflap.png'),
         ) {
-    this.x = x;
-    this.y = y;
+    this.x = initX;
+    this.y = initY;
   }
 
   @override
