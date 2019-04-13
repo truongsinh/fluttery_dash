@@ -5,6 +5,7 @@ import 'package:flame/game.dart' show BaseGame;
 
 import 'bird.dart';
 import 'ground.dart';
+import 'pipe.dart';
 
 enum GameState { playing, waiting, gameOver }
 
@@ -14,15 +15,18 @@ class FlutteryDashGame extends BaseGame {
   final Size screenSize;
   final Bird bird;
   final Ground ground;
+  final Pipe pipe;
   GameState gameState = GameState.waiting;
 
   FlutteryDashGame(this.screenSize)
       : bird = Bird(screenSize),
+        pipe = Pipe(screenSize),
         ground = Ground(screenSize) {
     this
           //
           ..add(bird)
           ..add(ground)
+          ..add(pipe)
         //
         ;
   }
