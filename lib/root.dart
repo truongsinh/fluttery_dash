@@ -46,6 +46,7 @@ class FlutteryDashGame extends BaseGame {
   void updatePlaying(double t) {
     bird.update(t * GameSpeed);
     ground.update(t * GameSpeed);
+    pipe.update(t * GameSpeed);
     if (ground.checkCollidesWith(bird)) {
       print('bird collides with ground');
       gameState = GameState.gameOver;
@@ -64,6 +65,7 @@ class FlutteryDashGame extends BaseGame {
       case GameState.gameOver:
         gameState = GameState.waiting;
         bird.setUp();
+        pipe.setUp();
         print('from gameOver to waiting');
         return;
     }
