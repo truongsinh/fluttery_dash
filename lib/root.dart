@@ -6,13 +6,15 @@ import 'package:flame/game.dart' show BaseGame;
 import 'bird.dart';
 import 'ground.dart';
 
+enum GameState { playing, waiting, gameOver }
+
 class FlutteryDashGame extends BaseGame {
   static const double GameSpeed = 1.0;
 
   final Size screenSize;
   final Bird bird;
   final Ground ground;
-  bool shouldUpdate = true;
+  GameState gameState = GameState.waiting;
 
   FlutteryDashGame(this.screenSize)
       : bird = Bird(screenSize),
@@ -27,18 +29,38 @@ class FlutteryDashGame extends BaseGame {
 
   @override
   void update(double t) {
-    if (!shouldUpdate) {
-      return;
+    switch (gameState) {
+      case GameState.playing:
+        updatePlaying(t);
+        return;
+      case GameState.waiting:
+      case GameState.gameOver:
+        return;
     }
+  }
+
+  void updatePlaying(double t) {
     bird.update(t * GameSpeed);
     ground.update(t * GameSpeed);
     if (ground.checkCollidesWith(bird)) {
       print('bird collides with ground');
-      shouldUpdate = false;
+      gameState = GameState.gameOver;
     }
   }
 
   void onTapDown(TapDownDetails ev) {
-    bird.flap();
+    switch (gameState) {
+      case GameState.playing:
+        bird.flap();
+        return;
+      case GameState.waiting:
+        gameState = GameState.playing;
+        print('from waiting to playing');
+        return;
+      case GameState.gameOver:
+        gameState = GameState.waiting;
+        print('from gameOver to waiting');
+        return;
+    }
   }
 }
