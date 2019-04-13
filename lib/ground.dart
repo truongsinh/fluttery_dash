@@ -20,6 +20,9 @@ class Ground extends SpriteComponent {
   }
 
   void update(double t) {
+    if (this.x + screenSize.width <= 0) {
+      this.x = 0;
+    }
     this.x -= t * groundSpeed;
   }
 }
