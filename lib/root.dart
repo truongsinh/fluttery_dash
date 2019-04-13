@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/gestures.dart';
+import 'package:flame/components/component.dart' show PositionComponent;
 import 'package:flame/game.dart' show BaseGame;
 
 import 'bird.dart';
@@ -11,6 +12,7 @@ class FlutteryDashGame extends BaseGame {
   final Size screenSize;
   final Bird bird;
   final Ground ground;
+  bool shouldUpdate = true;
 
   FlutteryDashGame(this.screenSize)
       : bird = Bird(screenSize),
@@ -25,8 +27,15 @@ class FlutteryDashGame extends BaseGame {
 
   @override
   void update(double t) {
+    if (!shouldUpdate) {
+      return;
+    }
     bird.update(t * GameSpeed);
     ground.update(t * GameSpeed);
+    if (ground.checkCollidesWith(bird)) {
+      print('bird collides with ground');
+      shouldUpdate = false;
+    }
   }
 
   void onTapDown(TapDownDetails ev) {

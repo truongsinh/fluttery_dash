@@ -25,4 +25,9 @@ class Ground extends SpriteComponent {
     }
     this.x -= t * groundSpeed;
   }
+
+  bool checkCollidesWith(PositionComponent c) {
+    final rect = c.toRect();
+    return rect.bottom >= this.y;
+  }
 }
