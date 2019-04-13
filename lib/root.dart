@@ -59,6 +59,7 @@ class FlutteryDashGame extends BaseGame {
         return;
       case GameState.gameOver:
         gameState = GameState.waiting;
+        bird.resetPosition();
         print('from gameOver to waiting');
         return;
     }
