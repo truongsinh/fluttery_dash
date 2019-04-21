@@ -23,7 +23,7 @@ class Pipe extends SpriteComponent {
   }
 
   setUp() {
-    final someParam = 50 +  random.nextInt(300);
+    final someParam = 50 + random.nextInt(300);
     x = screenSize.width;
     y = screenSize.height - Ground.groundHeight - someParam;
   }
@@ -34,5 +34,12 @@ class Pipe extends SpriteComponent {
     if (x < -pipeWidth) {
       setUp();
     }
+  }
+
+  bool checkCollidesWith(PositionComponent c) {
+    final rect = c.toRect();
+    final thisRect = this.toRect();
+    var intersectedRect = rect.intersect(thisRect);
+    return intersectedRect.width > 0 && intersectedRect.height > 0;
   }
 }

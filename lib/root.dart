@@ -47,8 +47,13 @@ class FlutteryDashGame extends BaseGame {
     bird.update(t * GameSpeed);
     ground.update(t * GameSpeed);
     pipe.update(t * GameSpeed);
-    if (ground.checkCollidesWith(bird)) {
-      print('bird collides with ground');
+    if (//
+      ground.checkCollidesWith(bird) ||
+      pipe.checkCollidesWith(bird) ||
+      false
+      //
+      ) {
+      print('bird collides');
       gameState = GameState.gameOver;
     }
   }
