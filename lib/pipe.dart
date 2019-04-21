@@ -30,7 +30,7 @@ class Pipe extends SpriteComponent {
 
   @override
   void update(double t) {
-    x -= t * Ground.groundSpeed;
+    x -= t;
     if (x < -pipeWidth) {
       setUp();
     }

@@ -2,8 +2,8 @@ import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flame/game.dart' show BaseGame;
 
+import 'moving_env.dart';
 import 'bird.dart';
-import 'ground.dart';
 
 enum GameState { playing, waiting, gameOver }
 
@@ -12,16 +12,16 @@ class FlutteryDashGame extends BaseGame {
 
   final Size screenSize;
   final Bird bird;
-  final Ground ground;
+  final MovingEnvironment movingEnvironment;
   GameState gameState = GameState.waiting;
 
   FlutteryDashGame(this.screenSize)
       : bird = Bird(screenSize),
-        ground = Ground(screenSize) {
+        movingEnvironment = MovingEnvironment(screenSize) {
     this
           //
           ..add(bird)
-          ..add(ground)
+          ..add(movingEnvironment)
         //
         ;
   }
@@ -40,9 +40,9 @@ class FlutteryDashGame extends BaseGame {
 
   void updatePlaying(double t) {
     bird.update(t * GameSpeed);
-    ground.update(t * GameSpeed);
+    movingEnvironment.update(t * GameSpeed);
     if (//
-      ground.checkCollidesWith(bird) ||
+      movingEnvironment.checkCollidesWith(bird) ||
       false
       //
       ) {
@@ -63,7 +63,7 @@ class FlutteryDashGame extends BaseGame {
       case GameState.gameOver:
         gameState = GameState.waiting;
         bird.setUp();
-        ground.setUp();
+        movingEnvironment.setUp();
         print('from gameOver to waiting');
         return;
     }
