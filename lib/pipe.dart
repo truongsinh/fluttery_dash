@@ -22,13 +22,16 @@ class Pipe extends SpriteComponent {
   }
 
   setUp() {
-    final someParam = 50;
+    final someParam = 150;
     x = screenSize.width;
     y = screenSize.height - Ground.groundHeight - someParam;
   }
 
   @override
   void update(double t) {
-    this.x -= t * Ground.groundSpeed;
+    x -= t * Ground.groundSpeed;
+    if (x < -pipeWidth) {
+      setUp();
+    }
   }
 }
