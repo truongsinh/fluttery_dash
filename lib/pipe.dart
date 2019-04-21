@@ -11,6 +11,7 @@ class Pipe extends SpriteComponent {
   static const pipeHeight = 480.0;
 
   final Size screenSize;
+  final Random random = Random();
 
   Pipe(this.screenSize)
       : super.fromSprite(
@@ -22,7 +23,7 @@ class Pipe extends SpriteComponent {
   }
 
   setUp() {
-    final someParam = 150;
+    final someParam = 50 +  random.nextInt(300);
     x = screenSize.width;
     y = screenSize.height - Ground.groundHeight - someParam;
   }

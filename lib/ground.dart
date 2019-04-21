@@ -5,7 +5,7 @@ import 'package:flame/sprite.dart';
 
 class Ground extends SpriteComponent {
   static const groundHeight = 130.0;
-  static const groundSpeed = 120;
+  static const groundSpeed = 200;
 
   final Size screenSize;
 
