@@ -48,6 +48,6 @@ class Bird extends SpriteComponent {
   }
 
   void flap() {
-    accelerationTowardGround = flapAcceleration;
+    accelerationTowardGround += flapAcceleration;
   }
 }
