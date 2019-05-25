@@ -1,7 +1,9 @@
+import 'dart:math' as Math;
 import 'dart:ui';
 
 import 'package:flame/components/component.dart';
 import 'package:flame/sprite.dart';
+import 'package:flame/anchor.dart';
 
 enum BirdStatus { waiting, flying }
 enum BirdFlyingStatus { up, down, none }
@@ -29,6 +31,7 @@ class Bird extends SpriteComponent {
           birdHeight,
           Sprite('bluebird-midflap.png'),
         ) {
+    anchor = Anchor.center;
     setUp();
   }
 
@@ -43,11 +46,25 @@ class Bird extends SpriteComponent {
     if (this.y < screenSize.height - birdHeight) {
       accelerationTowardGround += gravityAcceleration * t;
       this.y += accelerationTowardGround * t;
+      angle = Math.atan(accelerationTowardGround / 1000);
     }
     super.update(t);
   }
 
   void flap() {
     accelerationTowardGround += flapAcceleration;
+  }
+
+  // @todo: likely flame's bug, when we change `angle` and `anchor`, `toRect` should have changed accordingly
+  @override
+  Rect toRect() {
+    var superRect = super.toRect();
+
+    return Rect.fromLTWH(
+      superRect.left - superRect.width / 2,
+      superRect.top - superRect.height / 2,
+      superRect.width,
+      superRect.height,
+    );
   }
 }
