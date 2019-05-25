@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/gestures.dart';
+import 'package:flame/flame.dart';
 import 'package:flame/game.dart' show BaseGame;
 
 import 'background.dart';
@@ -61,6 +62,8 @@ class FlutteryDashGame extends BaseGame {
             false
         //
         ) {
+      Flame.audio.play('hit.wav');
+      Flame.audio.play('die.wav');
       print('bird collides');
       gameState = GameState.gameOver;
     }
