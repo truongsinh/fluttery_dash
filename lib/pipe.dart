@@ -13,8 +13,9 @@ class Pipe extends SpriteComponent {
 
   final Size screenSize;
   final Random random = Random();
+  final bool top;
 
-  Pipe(this.screenSize, [top = false])
+  Pipe(this.screenSize, [this.top = false])
       : super.fromSprite(
           pipeWidth,
           pipeHeight,
@@ -27,17 +28,27 @@ class Pipe extends SpriteComponent {
     }
   }
 
-  setUp() {
+  recycle() {
     final someParam = 50 + random.nextInt(300);
     x = screenSize.width;
     y = someParam.toDouble();
+    if (!top) {
+      y = screenSize.height - Ground.groundHeight - y;
+    }
+  }
+
+  setUp() {
+    recycle();
+    if (top) {
+      x += screenSize.width / 2;
+    }
   }
 
   @override
   void update(double t) {
     x -= t * Ground.groundSpeed;
     if (x < -pipeWidth) {
-      setUp();
+      recycle();
     }
   }
 
@@ -52,6 +63,10 @@ class Pipe extends SpriteComponent {
   @override
   Rect toRect() {
     var superRect = super.toRect();
+
+    if (!top) {
+      return superRect;
+    }
 
     return Rect.fromLTWH(
       superRect.left,
