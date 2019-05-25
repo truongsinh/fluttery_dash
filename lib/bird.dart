@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flame/components/component.dart';
 import 'package:flame/sprite.dart';
 import 'package:flame/anchor.dart';
+import 'package:flame/flame.dart';
 
 enum BirdStatus { waiting, flying }
 enum BirdFlyingStatus { up, down, none }
@@ -53,6 +54,7 @@ class Bird extends SpriteComponent {
   }
 
   void flap() {
+    Flame.audio.play('wing.wav');
     accelerationTowardGround += flapAcceleration;
   }
 
