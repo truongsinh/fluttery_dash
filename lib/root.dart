@@ -1,6 +1,5 @@
 import 'dart:ui';
 import 'package:flutter/gestures.dart';
-import 'package:flame/components/component.dart' show PositionComponent;
 import 'package:flame/game.dart' show BaseGame;
 
 import 'bird.dart';
@@ -15,18 +14,21 @@ class FlutteryDashGame extends BaseGame {
   final Size screenSize;
   final Bird bird;
   final Ground ground;
-  final Pipe pipe;
+  // final Pipe pipe;
+  final Pipe pipe2;
   GameState gameState = GameState.waiting;
 
   FlutteryDashGame(this.screenSize)
       : bird = Bird(screenSize),
-        pipe = Pipe(screenSize),
+        // pipe = Pipe(screenSize),
+        pipe2 = Pipe(screenSize, true),
         ground = Ground(screenSize) {
     this
           //
           ..add(bird)
           ..add(ground)
-          ..add(pipe)
+          // ..add(pipe)
+          ..add(pipe2)
         //
         ;
   }
@@ -46,10 +48,12 @@ class FlutteryDashGame extends BaseGame {
   void updatePlaying(double t) {
     bird.update(t * GameSpeed);
     ground.update(t * GameSpeed);
-    pipe.update(t * GameSpeed);
+    // pipe.update(t * GameSpeed);
+    pipe2.update(t * GameSpeed);
     if (//
       ground.checkCollidesWith(bird) ||
-      pipe.checkCollidesWith(bird) ||
+      // pipe.checkCollidesWith(bird) ||
+      pipe2.checkCollidesWith(bird) ||
       false
       //
       ) {
@@ -70,7 +74,8 @@ class FlutteryDashGame extends BaseGame {
       case GameState.gameOver:
         gameState = GameState.waiting;
         bird.setUp();
-        pipe.setUp();
+        // pipe.setUp();
+        pipe2.setUp();
         print('from gameOver to waiting');
         return;
     }

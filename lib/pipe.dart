@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flame/components/component.dart';
 import 'package:flame/sprite.dart';
+import 'package:flame/anchor.dart';
 
 import 'ground.dart';
 
@@ -13,19 +14,23 @@ class Pipe extends SpriteComponent {
   final Size screenSize;
   final Random random = Random();
 
-  Pipe(this.screenSize)
+  Pipe(this.screenSize, [top = false])
       : super.fromSprite(
           pipeWidth,
           pipeHeight,
           Sprite('pipe-green.png'),
         ) {
     setUp();
+    if (top) {
+      angle = pi;
+      anchor = Anchor.topRight;
+    }
   }
 
   setUp() {
     final someParam = 50 + random.nextInt(300);
     x = screenSize.width;
-    y = screenSize.height - Ground.groundHeight - someParam;
+    y = someParam.toDouble();
   }
 
   @override
@@ -41,5 +46,18 @@ class Pipe extends SpriteComponent {
     final thisRect = this.toRect();
     var intersectedRect = rect.intersect(thisRect);
     return intersectedRect.width > 0 && intersectedRect.height > 0;
+  }
+
+  // @todo: likely flame's bug, when we change `angle` and `anchor`, `toRect` should have changed accordingly
+  @override
+  Rect toRect() {
+    var superRect = super.toRect();
+
+    return Rect.fromLTWH(
+      superRect.left,
+      superRect.top - pipeHeight,
+      superRect.width,
+      superRect.height,
+    );
   }
 }
