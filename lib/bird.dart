@@ -39,6 +39,7 @@ class Bird extends SpriteComponent {
     x = initX;
     y = initY;
     accelerationTowardGround = flapAcceleration;
+    angle = 0;
   }
 
   @override
