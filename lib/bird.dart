@@ -1,7 +1,8 @@
 import 'dart:math' as Math;
 import 'dart:ui';
 
-import 'package:flame/components/component.dart';
+import 'package:flame/animation.dart';
+import 'package:flame/components/animation_component.dart';
 import 'package:flame/sprite.dart';
 import 'package:flame/anchor.dart';
 import 'package:flame/flame.dart';
@@ -9,7 +10,7 @@ import 'package:flame/flame.dart';
 enum BirdStatus { waiting, flying }
 enum BirdFlyingStatus { up, down, none }
 
-class Bird extends SpriteComponent {
+class Bird extends AnimationComponent {
   double accelerationTowardGround = 0;
 
   final Size screenSize;
@@ -27,10 +28,15 @@ class Bird extends SpriteComponent {
   BirdFlyingStatus flyingStatus = BirdFlyingStatus.none;
 
   Bird(this.screenSize)
-      : super.fromSprite(
+      : super(
           birdWidth,
           birdHeight,
-          Sprite('bluebird-midflap.png'),
+          Animation.spriteList([
+            Sprite('bluebird-midflap.png'),
+            Sprite('bluebird-upflap.png'),
+            Sprite('bluebird-midflap.png'),
+            Sprite('bluebird-downflap.png'),
+          ], stepTime: 0.15, loop: true),
         ) {
     anchor = Anchor.center;
     setUp();
