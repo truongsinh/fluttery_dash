@@ -40,7 +40,7 @@ class Pipe extends SpriteComponent {
   setUp() {
     recycle();
     if (top) {
-      x += screenSize.width / 2;
+      x += (screenSize.width + pipeWidth) / 2;
     }
   }
 
