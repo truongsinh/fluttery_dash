@@ -13,6 +13,7 @@ enum GameState { playing, waiting, gameOver }
 class FlutteryDashGame extends BaseGame {
   static const double GameSpeed = 1.0;
 
+  final Size screenSize;
   final Bird bird;
   final Ground ground;
   final Background background;
@@ -20,7 +21,7 @@ class FlutteryDashGame extends BaseGame {
   final Pipe pipe2;
   GameState gameState = GameState.waiting;
 
-  FlutteryDashGame(Size screenSize, Brightness brightness)
+  FlutteryDashGame(this.screenSize)
       : bird = Bird(screenSize),
         background = Background(screenSize),
         pipe = Pipe(screenSize),
@@ -45,8 +46,7 @@ class FlutteryDashGame extends BaseGame {
         return;
       case GameState.waiting:
       case GameState.gameOver:
-        // update dark theme / night mode
-        // background.update(t * GameSpeed);
+        background.update(t);
         return;
     }
   }
