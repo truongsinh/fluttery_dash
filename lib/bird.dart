@@ -1,4 +1,5 @@
 import 'dart:math' as Math;
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flame/animation.dart';
@@ -61,7 +62,7 @@ class Bird extends AnimationComponent {
 
   void flap() {
     Flame.audio.play('wing.wav');
-    accelerationTowardGround += flapAcceleration;
+    accelerationTowardGround = max(flapAcceleration, flapAcceleration + accelerationTowardGround) ;
   }
 
   // @todo: likely flame's bug, when we change `angle` and `anchor`, `toRect` should have changed accordingly

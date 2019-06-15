@@ -5,6 +5,7 @@ import 'package:flame/sprite.dart';
 
 class Ground extends SpriteComponent {
   static const groundHeight = 130.0;
+  // @todo hot reload demo effect, change here
   static const groundSpeed = 200;
 
   final Size screenSize;

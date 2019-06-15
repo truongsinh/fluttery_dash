@@ -58,6 +58,7 @@ class FlutteryDashGame extends BaseGame {
     pipe2.update(t * GameSpeed);
     if ( //
         ground.checkCollidesWith(bird) ||
+            // @todo hot reload demo effect, change here
             pipe.checkCollidesWith(bird) ||
             pipe2.checkCollidesWith(bird) ||
             false
