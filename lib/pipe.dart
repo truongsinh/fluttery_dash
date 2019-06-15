@@ -11,6 +11,9 @@ class Pipe extends SpriteComponent {
   static const pipeWidth = 78.0;
   static const pipeHeight = 480.0;
 
+  static final _daySprite = Sprite('pipe-green.png');
+  static final _nightSprite = Sprite('pipe-red.png');
+
   final Size screenSize;
   final Random random = Random();
   final bool top;
@@ -19,7 +22,7 @@ class Pipe extends SpriteComponent {
       : super.fromSprite(
           pipeWidth,
           pipeHeight,
-          Sprite('pipe-green.png'),
+          _daySprite,
         ) {
     setUp();
     if (top) {
@@ -49,6 +52,14 @@ class Pipe extends SpriteComponent {
     x -= t * Ground.groundSpeed;
     if (x < -pipeWidth) {
       recycle();
+    }
+  }
+
+  void updatePlatformBrightness(Brightness platformBrightness) {
+    if (platformBrightness == Brightness.dark) {
+      sprite = _nightSprite;
+    } else {
+      sprite = _daySprite;
     }
   }
 

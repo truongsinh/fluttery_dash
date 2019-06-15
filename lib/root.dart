@@ -46,7 +46,9 @@ class FlutteryDashGame extends BaseGame {
         return;
       case GameState.waiting:
       case GameState.gameOver:
-        background.update(t);
+        background.updatePlatformBrightness(window.platformBrightness);
+        pipe.updatePlatformBrightness(window.platformBrightness);
+        pipe2.updatePlatformBrightness(window.platformBrightness);
         return;
     }
   }
