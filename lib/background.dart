@@ -8,16 +8,18 @@ class Background extends SpriteComponent {
       : super.fromSprite(
           screenSize.width,
           screenSize.height,
-          Sprite('background-day.png'),
+          _daySprite,
         );
+  static final _nightSprite = Sprite('background-night.png');
+  static final _daySprite = Sprite('background-day.png');
   int priority() => -100;
 
   @override
   void update(double t) {
     if (window.platformBrightness == Brightness.dark) {
-      sprite = Sprite('background-night.png');
+      sprite = _nightSprite;
     } else {
-      sprite = Sprite('background-day.png');
+      sprite = _daySprite;
     }
   }
 }
