@@ -11,4 +11,13 @@ class Background extends SpriteComponent {
           Sprite('background-day.png'),
         );
   int priority() => -100;
+
+  @override
+  void update(double t) {
+    if (window.platformBrightness == Brightness.dark) {
+      sprite = Sprite('background-night.png');
+    } else {
+      sprite = Sprite('background-day.png');
+    }
+  }
 }
