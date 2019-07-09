@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flame/flame.dart';
-import 'package:flame/game.dart' show BaseGame;
+import 'package:flame/game.dart' show Game, BaseGame;
 
 import 'background.dart';
 import 'bird.dart';
@@ -51,6 +51,11 @@ class FlutteryDashGame extends BaseGame {
         pipe2.updatePlatformBrightness(window.platformBrightness);
         return;
     }
+  }
+
+  @override
+  bool shouldRepaint() {
+    return gameState == GameState.playing;
   }
 
   void updatePlaying(double t) {

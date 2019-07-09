@@ -13,7 +13,10 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flame: ^0.10.2
+  flame:
+    git:
+      url: git://github.com/luanpotter/flame
+      ref: 56fe5cc5f37b925d502bdf8e3b53cf3304ae04eb
 
 flutter:
   assets:

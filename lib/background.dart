@@ -21,4 +21,9 @@ class Background extends SpriteComponent {
       sprite = _daySprite;
     }
   }
+
+  @override
+  void shouldRepaint() {
+
+  }
 }
